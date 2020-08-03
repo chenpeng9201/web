@@ -36,6 +36,25 @@
 			$("#cate_list").html(str);
 		});
 		
+		//查找最新商品和最热商品
+		HM.ajax("/product","method=findNewAndHot",function(data){
+			var str = "";
+			var str2 = "";
+			if(data.code==1){
+				//取出最新商品数据填充到页面
+				$.each(data.obj[0],function(index,ele){
+					str += "<div class=\"col-md-2\" style=\"text-align:center;height:200px;padding:10px 0px;\"><a href=\"product_info.htm\"> <img src=\"http://www.itheima331.com:8020/web/resources/"+ele.pimage+"\" width=\"130\" height=\"130\" style=\"display: inline-block;\"></a><p><a href=\"product_info.html\" style='color:#666'>"+ele.pname+"</a></p><p><font color=\"#E4393C\" style=\"font-size:16px\">&yen;"+ele.shop_price+"</font></p></div>";
+				});
+				
+				//去除最热商品数据填充到页面
+				$.each(data.obj[1],function(index,ele){
+					str2 += "<div class=\"col-md-2\" style=\"text-align:center;height:200px;padding:10px 0px;\"><a href=\"product_info.htm\"> <img src=\"http://www.itheima331.com:8020/web/resources/"+ele.pimage+"\" width=\"130\" height=\"130\" style=\"display: inline-block;\"></a><p><a href=\"product_info.html\" style='color:#666'>"+ele.pname+"</a></p><p><font color=\"#E4393C\" style=\"font-size:16px\">&yen;"+ele.shop_price+"</font></p></div>";
+				});
+				
+			}
+			$("#new_produce").html(str);
+			$("#hot_produce").html(str2);
+		});
 	});
 	//退出登录的函数
 	function loginOut(){
