@@ -30,7 +30,7 @@
 			if(data.code==1){
 				//取出数据填充到页面
 				$.each(data.obj,function(index,ele){
-					str += "<li><a href=\"#\">"+ele.cname+"</a></li>";
+					str += "<li><a href=\"http://www.itheima331.com:8020/web/view/product/list.html?method=findByPage&cid="+ele.cid+"\">"+ele.cname+"</a></li>";
 				});
 			}
 			$("#cate_list").html(str);
