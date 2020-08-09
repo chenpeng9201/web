@@ -107,23 +107,23 @@ var HM=
 				url+="?_t="+new Date().getTime();
 			}
 			var pageHTML="";
-			if(pb.pageNumber==1){
+			if(pb.currentPage==1){
 				pageHTML+="<li class=\"disabled\"><a href=\"javascript:;\" aria-label=\"Previous\"><span aria-hidden=\"true\">&laquo;</span></a></li>\n";
 			}else{
-				pageHTML+="<li ><a href=\""+url+"&pageNumber="+(pb.pageNumber-1)+"\" aria-label=\"Previous\"><span aria-hidden=\"true\">&laquo;</span></a></li>\n";
+				pageHTML+="<li ><a href=\""+url+"&pageNumber="+(pb.currentPage-1)+"\" aria-label=\"Previous\"><span aria-hidden=\"true\">&laquo;</span></a></li>\n";
 			}
-			for(var i=pb.start;i<=pb.end;i++){
-				if(i==pb.pageNumber){
+			for(var i=1;i<=pb.totalPage;i++){
+				if(i==pb.currentPage){
 					pageHTML+="<li class='active'><a href='javascript:;' >"+i+"</a></li>"
 				}else{
 					pageHTML+="<li ><a  href='"+url+"&pageNumber="+i+"'>"+i+"</a></li>"
 				}
 				
 			}
-			if(pb.pageNumber==pb.totalPage){
+			if(pb.currentPage==pb.totalPage){
 				pageHTML+="<li class=\"disabled\" ><a href=\"javascript:;\" aria-label=\"Next\"><span aria-hidden=\"true\">&raquo;</span></a></li>"
 			}else{
-				pageHTML+="<li><a href='"+url+"&pageNumber="+(pb.pageNumber+1)+"' aria-label=\"Next\"><span aria-hidden=\"true\">&raquo;</span></a></li>"
+				pageHTML+="<li><a href='"+url+"&pageNumber="+(pb.currentPage+1)+"' aria-label=\"Next\"><span aria-hidden=\"true\">&raquo;</span></a></li>"
 			}
 			return pageHTML;	
 			
