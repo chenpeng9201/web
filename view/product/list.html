@@ -15,8 +15,25 @@
 		<style>
 		</style>
 		<script type="text/javascript">
-			HM.ajax("/product","method=findByPage&cid="+HM.getParameter("cid"),function(data){
-				
+			//获取页面传递的分类主键
+			var cid = HM.getParameter("cid");
+			//获取当前页
+			var currentPage = HM.getParameter("pageNumber");
+			var param = "method=findByPage&cid="+cid+"&pageNumber="+currentPage;
+			HM.ajax("/product",param,function(data){
+				var str = "";
+				$.each(data.obj.list,function(index,ele){
+					str += "<div style=\"height:260px\" class=\"col-md-2\">\n" +
+                    "\t\t\t\t\t\t<a href=\"info.html\">\n" +
+                    "\t\t\t\t\t\t\t<img src=\"http://www.itheima331.com:8020/web/resources/"+ele.pimage+"\" width=\"170\" height=\"170\" style=\"display: inline-block;\">\n" +
+                    "\t\t\t\t\t\t</a>\n" +
+                    "\t\t\t\t\t\t<p><a href=\"info.htmll\" style='color:green'>"+ele.pname+"</a></p>\n" +
+                    "\t\t\t\t\t\t<p><font color=\"#FF0000\">商城价：&yen;"+ele.shop_price+"</font></p>\n" +
+                    "\t\t\t\t\t</div>";
+				});
+				$("#productList").html(str);
+				var page = HM.page(data.obj,"http://www.itheima331.com:8020/web/view/product/list.html?cid="+cid);
+				$("#page").html(page);
 			})
 		</script>
 	</head>
@@ -25,7 +42,7 @@
 			<div class="container-fluid">
 			<div id="header" style="min-height: 130px;"></div>	
 			<div class="container">
-				<div class="row" style="width:1210px;margin:0 auto;">
+				<div id="productList" class="row" style="width:1210px;margin:0 auto;">
 		
 					<div class="col-md-2">
 						<a href="info.html">
@@ -121,8 +138,8 @@
 		
 				<!--分页 -->
 				<div style="width:380px;margin:0 auto;margin-top:50px;">
-					<ul class="pagination" style="text-align:center; margin-top:10px;">
-						<li class="disabled"><a href="#" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>
+					<ul id = "page" class="pagination" style="text-align:center; margin-top:10px;">
+						<!-- <li class="disabled"><a href="#" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>
 						<li class="active"><a href="#">1</a></li>
 						<li><a href="#">2</a></li>
 						<li><a href="#">3</a></li>
@@ -136,7 +153,7 @@
 							<a href="#" aria-label="Next">
 								<span aria-hidden="true">&raquo;</span>
 							</a>
-						</li>
+						</li> -->
 					</ul>
 				</div>
 				<!-- 分页结束=======================        -->
