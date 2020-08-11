@@ -24,10 +24,10 @@
 				var str = "";
 				$.each(data.obj.list,function(index,ele){
 					str += "<div style=\"height:260px\" class=\"col-md-2\">\n" +
-                    "\t\t\t\t\t\t<a href=\"info.html\">\n" +
+                    "\t\t\t\t\t\t<a href=\"http://www.itheima331.com:8020/web/view/product/info.html?pid="+ele.pid+"\">\n" +
                     "\t\t\t\t\t\t\t<img src=\"http://www.itheima331.com:8020/web/resources/"+ele.pimage+"\" width=\"170\" height=\"170\" style=\"display: inline-block;\">\n" +
                     "\t\t\t\t\t\t</a>\n" +
-                    "\t\t\t\t\t\t<p><a href=\"info.htmll\" style='color:green'>"+ele.pname+"</a></p>\n" +
+                    "\t\t\t\t\t\t<p><a href=\"http://www.itheima331.com:8020/web/view/product/info.html?pid="+ele.pid+"\" style='color:green'>"+ele.pname+"</a></p>\n" +
                     "\t\t\t\t\t\t<p><font color=\"#FF0000\">商城价：&yen;"+ele.shop_price+"</font></p>\n" +
                     "\t\t\t\t\t</div>";
 				});
