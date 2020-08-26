@@ -13,6 +13,43 @@
 		<!-- 引入自定义css文件 style.css -->
 		<style>
 		</style>
+		
+		<script type="text/javascript">
+			//页面加载完成后发出请求获取购物车
+			$(function(){
+				HM.ajax("/Cart","method=cartList",function(data){
+					var s = "";
+					$.each(data.obj.cartItem,function(index,ele){
+						str = "<tr class=\"active\">\n" +
+							"\t\t\t\t\t\t\t\t\t<td width=\"60\" width=\"40%\">\n" +
+							"\t\t\t\t\t\t\t\t\t\t<input type=\"hidden\" name=\"id\" value=\"22\">\n" +
+							"\t\t\t\t\t\t\t\t\t\t<img src=\"http://www.itheima331.com:8020/web/resources/"+ele.product.pimage+"\" width=\"70\" height=\"60\">\n" +
+							"\t\t\t\t\t\t\t\t\t</td>\n" +
+							"\t\t\t\t\t\t\t\t\t<td width=\"30%\">\n" +
+							"\t\t\t\t\t\t\t\t\t\t<a href=\"http://www.itheima331.com:8020/web/view/product/info.html?pid="+ele.product.pid+"\"> "+ele.product.pname+"</a>\n" +
+							"\t\t\t\t\t\t\t\t\t</td>\n" +
+							"\t\t\t\t\t\t\t\t\t<td width=\"20%\">\n" +
+							"\t\t\t\t\t\t\t\t\t\t￥"+ele.product.shop_price+"\n" +
+							"\t\t\t\t\t\t\t\t\t</td>\n" +
+							"\t\t\t\t\t\t\t\t\t<td width=\"10%\">\n" +
+							"\t\t\t\t\t\t\t\t\t\t"+ele.count+"\n" +
+							"\t\t\t\t\t\t\t\t\t</td>\n" +
+							"\t\t\t\t\t\t\t\t\t<td width=\"15%\">\n" +
+							"\t\t\t\t\t\t\t\t\t\t<span class=\"subtotal\">￥"+ele.subtotal+"</span>\n" +
+							"\t\t\t\t\t\t\t\t\t</td>\n" +
+							"\t\t\t\t\t\t\t\t\t<td>\n" +
+							"\t\t\t\t\t\t\t\t\t\t<a href=\"javascript:;\" class=\"delete\">删除</a>\n" +
+							"\t\t\t\t\t\t\t\t\t</td>\n" +
+							"\t\t\t\t\t\t\t\t</tr>";
+						$("#cartlist").append(str);
+						
+					});
+					$("#totalprice").html(data.obj.totalprice);
+				
+				
+				})
+			});
+		</script>
 	</head>
 
 	<body>
@@ -24,7 +61,7 @@
 					<div style="margin:0 auto; margin-top:10px;width:950px;">
 						<strong style="font-size:16px;margin:5px 0;">购物车详情</strong>
 						<table class="table table-bordered">
-							<tbody>
+							<tbody id="cartlist">
 								<tr class="warning">
 									<th>图片</th>
 									<th>商品</th>
@@ -33,7 +70,7 @@
 									<th>小计</th>
 									<th>操作</th>
 								</tr>
-								<tr class="active">
+								<!-- <tr class="active">
 									<td width="60" width="40%">
 										<input type="hidden" name="id" value="22">
 										<img src="http://www.itheima331.com:8020/web/resources/products/1/donggua1.jpg" width="70" height="60">
@@ -53,28 +90,8 @@
 									<td>
 										<a href="javascript:;" class="delete">删除</a>
 									</td>
-								</tr>
-								<tr class="active">
-									<td width="60" width="40%">
-										<input type="hidden" name="id" value="22">
-										<img src="http://www.itheima331.com:8020/web/resources/products/1/donggua1.jpg" width="70" height="60">
-									</td>
-									<td width="30%">
-										<a target="_blank"> 有机蔬菜      大冬瓜...</a>
-									</td>
-									<td width="20%">
-										￥298.00
-									</td>
-									<td width="10%">
-										2
-									</td>
-									<td width="15%">
-										<span class="subtotal">￥596.00</span>
-									</td>
-									<td>
-										<a href="javascript:;" class="delete">删除</a>
-									</td>
-								</tr>
+								</tr> -->
+								
 							</tbody>
 						</table>
 					</div>
@@ -82,7 +99,7 @@
 	
 				<div style="margin-right:130px;">
 					<div style="text-align:right;">
-						商品金额: <strong style="color:#ff6600;">￥596.00元</strong>
+						商品金额: <strong style="color:#ff6600;">￥<span id="totalprice">596.00</span>元</strong>
 					</div>
 					<div style="text-align:right;margin-top:10px;margin-bottom:10px;">
 						<a href="order_info.htm" id="clear" class="clear">清空购物车</a>
