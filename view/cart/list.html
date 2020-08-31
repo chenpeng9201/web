@@ -38,7 +38,7 @@
 							"\t\t\t\t\t\t\t\t\t\t<span class=\"subtotal\">￥"+ele.subtotal+"</span>\n" +
 							"\t\t\t\t\t\t\t\t\t</td>\n" +
 							"\t\t\t\t\t\t\t\t\t<td>\n" +
-							"\t\t\t\t\t\t\t\t\t\t<a href=\"javascript:;\" class=\"delete\">删除</a>\n" +
+							"\t\t\t\t\t\t\t\t\t\t<a onclick=\"removeCartItem('"+ele.product.pid+"')\" href=\"javascript:;\" class=\"delete\">删除</a>\n" +
 							"\t\t\t\t\t\t\t\t\t</td>\n" +
 							"\t\t\t\t\t\t\t\t</tr>";
 						$("#cartlist").append(str);
@@ -49,6 +49,32 @@
 				
 				})
 			});
+			
+			function removeCartItem(pid){
+				//移除购物项
+				var param = "pid="+pid;
+				if(confirm("确认移除此商品吗?")){
+					HM.ajax("/Cart?method=removeCartItem",param,function(data){
+						if(data.code==1){
+							//操作成功，重新加载页面
+							location.reload();
+						}
+					})
+				}
+				
+			}
+			
+			function clearCartItem(){
+				//清空购物车
+				if(confirm("确认清空购物车吗?")){
+					HM.ajax("/Cart?method=clearCartItem","",function(data){
+						if(data.code==1){
+							//操作成功，重新加载页面
+							location.reload();
+						}
+					})
+				}
+			}
 		</script>
 	</head>
 
@@ -99,10 +125,10 @@
 	
 				<div style="margin-right:130px;">
 					<div style="text-align:right;">
-						商品金额: <strong style="color:#ff6600;">￥<span id="totalprice">596.00</span>元</strong>
+						商品金额: <strong style="color:#ff6600;">￥<span id="totalprice"></span>元</strong>
 					</div>
 					<div style="text-align:right;margin-top:10px;margin-bottom:10px;">
-						<a href="order_info.htm" id="clear" class="clear">清空购物车</a>
+						<a href="javascript:;" id="clear" class="clear" onclick="clearCartItem()">清空购物车</a>
 						<a href="order_info.htm">
 							<input type="submit" width="100" value="提交订单" id="submit" border="0" style="background-color:#CD062D;height:35px;width:100px;color:white;">
 						</a>
