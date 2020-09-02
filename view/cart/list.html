@@ -75,6 +75,21 @@
 					})
 				}
 			}
+			
+			function submitOrder(){
+				//提交订单
+				HM.ajax("/orders?method=addOrders","",function(data){
+					if(data.code==2){
+						//尚未登录，跳转到登录页
+						alert(data.message);
+						location.href="http://www.itheima331.com:8020/web/login.html";
+					}else if(data.code==0){
+						//购物车为空，跳转到首页
+						alert(data.message);
+						location.href="http://www.itheima331.com:8020/web/index.html";
+					}
+				})
+			}
 		</script>
 	</head>
 
@@ -129,8 +144,9 @@
 					</div>
 					<div style="text-align:right;margin-top:10px;margin-bottom:10px;">
 						<a href="javascript:;" id="clear" class="clear" onclick="clearCartItem()">清空购物车</a>
-						<a href="order_info.htm">
-							<input type="submit" width="100" value="提交订单" id="submit" border="0" style="background-color:#CD062D;height:35px;width:100px;color:white;">
+						<a href="javascript:;">
+							<input type="submit" width="100" value="提交订单" id="submit" border="0" style="background-color:#CD062D;height:35px;width:100px;color:white;"
+							onclick="submitOrder()">
 						</a>
 					</div>
 				</div>
