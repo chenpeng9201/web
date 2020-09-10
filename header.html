@@ -13,14 +13,14 @@
 			  var s = "<li><a href=\"http://www.itheima331.com:8020/web/login.html\">登录</a></li>\n" +
         "\t\t\t<li><a href=\"http://www.itheima331.com:8020/web/register.html\">注册</a></li>\n" +
         "\t\t\t<li><a href=\"http://www.itheima331.com:8020/web/view/cart/list.html\">购物车</a></li>\n" +
-        "\t\t\t<li><a href=\"http://www.itheima331.com:8020/web/view/cart/list.html\">我的订单</a></li>";
+        "\t\t\t<li><a href=\"http://www.itheima331.com:8020/web/view/order/list.html\">我的订单</a></li>";
 			$("#login-menu").html(s);
 		}else{
 			//有cookie,显示你好 用户名,购物车,订单
 			var s = "<li>欢迎您 "+cookieValue+"</li>\n" +
         "\t\t\t<li><a href=\"#\" onclick='loginOut()'>退出登录</a></li>\n" +
         "\t\t\t<li><a href=\"http://www.itheima331.com:8020/web/view/cart/list.html\">购物车</a></li>\n" +
-        "\t\t\t<li><a href=\"http://www.itheima331.com:8020/web/view/cart/list.html\">我的订单</a></li>";
+        "\t\t\t<li><a href=\"http://www.itheima331.com:8020/web/view/order/list.html\">我的订单</a></li>";
 			$("#login-menu").html(s);
 		}
 		
